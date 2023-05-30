@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PurchasePlayers{% endblock %}
+
+{% block body %}
+    <h1>PurchasePlayers</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ purchase_player.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_purchase_players_index') }}">back to list</a>
+
+    <a href="{{ path('app_purchase_players_edit', {'id': purchase_player.id}) }}">edit</a>
+
+    {{ include('purchase_players/_delete_form.html.twig') }}
+{% endblock %}

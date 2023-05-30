@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Players{% endblock %}
+
+{% block body %}
+    <h1>Players</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Team</th>
+                <th>Purchased amount</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for player in players %}
+            <tr>
+                <td>{{ player.id }}</td>
+                <td>{{ player.name }}</td>
+                <td>{{ player.surname }}</td>
+                <td>{{ player.team.name }}</td>
+                <td>{{ player.purchaseAmount }}</td>
+                <td>
+                    <a href="{{ path('app_players_edit', {'team_id': team_id,'id': player.id}) }}">Edit</a>
+                    <a href="{{ path('app_players_show', {'team_id': team_id,'id': player.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	<div class="pagination">
+		{{ knp_pagination_render(players) }}
+	</div>
+    <a href="{{ path('app_players_new', {'team_id': team_id})}}">Create new</a> <br/>
+	<a href="{{ path('app_teams_index') }}">Back to Teams</a>
+{% endblock %}

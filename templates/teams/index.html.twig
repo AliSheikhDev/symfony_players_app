@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Teams index{% endblock %}
+
+{% block body %}
+    <h1>Teams index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Money_balance</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for team in teams %}
+            <tr>
+                <td>{{ team.id }}</td>
+                <td>{{ team.name }}</td>
+                <td>{{ team.country }}</td>
+                <td>{{ team.moneyBalance }}</td>
+                <td>
+                    <a href="{{ path('app_teams_show', {'id': team.id}) }}">show</a>
+                    <a href="{{ path('app_teams_edit', {'id': team.id}) }}">edit</a>
+					<a href="{{ path('app_players_index', {'team_id': team.id}) }}">players</a>
+					<a href="{{ path('app_purchase_players_index',{'team_id':team.id}) }}">Purchase Player From other Team</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	<div class="pagination">
+		{{ knp_pagination_render(teams) }}
+	</div>
+    <a href="{{ path('app_teams_new') }}">Create new</a> <br/>
+	
+{% endblock %}

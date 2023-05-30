@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}PurchasePlayers index{% endblock %}
+
+{% block body %}
+    <h1>PurchasePlayers index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Player Name</th>
+                <th>Team</th>
+                <th>Amount</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for purchase_player in purchase_players %}
+            <tr>
+                <td>{{ purchase_player.name }}</td>
+                <td>{{ purchase_player.team.name }}</td>
+                <td>{{ purchase_player.purchaseAmount }}</td>
+                <td>
+                    <a href="{{ url('app_purchase_players_purchase', {'id': purchase_player.id,'purchasing_team_id':current_team_id}) }}">Purchase</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+	<div class="pagination">
+		{{ knp_pagination_render(purchase_players) }}
+	</div>
+    <a href="{{ path('app_teams_index') }}">Back to Teams</a>
+{% endblock %}
